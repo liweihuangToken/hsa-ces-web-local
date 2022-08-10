@@ -1,0 +1,48 @@
+#set($end=$entity.length() - 2)
+#set($tableRealName=$entity.substring(0,$end))
+#set($tableRealNameLower=$tableRealName.substring(0, 1).toLowerCase()+$tableRealName.substring(1))
+#set($entityPackage=$package.Entity)
+#set($boPackage=$entityPackage.replace("entity", "bo"))
+#set($daoPackage=$entityPackage.replace("entity", "dao"))
+#set($boImplPackage=$entityPackage.replace("entity", "bo.impl"))
+#set($dtoPackage=$entityPackage.replace("entity", "dto.bas"))
+#set($queryDtoPackage=$entityPackage.replace("entity", "dto.query"))
+#set($updateDtoPackage=$entityPackage.replace("entity", "dto.updt"))
+#set($addDtoPackage=$entityPackage.replace("entity", "dto.add"))
+package ${package.Mapper};
+
+import ${package.Entity}.${entity};
+import ${queryDtoPackage}.${tableRealName}QueryDTO;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
+
+/**
+ * 简介: $!{table.comment} Mapper 接口
+ *
+ * @author ${author}
+ * @date ${date}
+ */
+@Mapper
+#set($end=$entity.length() - 2)
+#set($tableRealName=$entity.substring(0,$end))
+public interface ${tableRealName}DAO extends BaseMapper<${entity}> {
+
+    /**
+     * 插入（批量）
+     *
+     * @param ${tableRealNameLower}DOList
+     * @return
+     */
+    int saveBatch(List<${tableRealName}DO> ${tableRealNameLower}DOList);
+
+    /**
+     * 组合查询
+     *
+     * @param ${tableRealNameLower}QueryDTO
+     * @return
+     */
+    List<${tableRealName}DO> selectByQueryDTO(${tableRealName}QueryDTO ${tableRealNameLower}QueryDTO);
+
+}

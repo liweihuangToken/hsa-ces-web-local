@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+
+    <!--登录-->
+    <dubbo:reference id="authenticationService" interface="cn.hsa.cep.auc.service.AuthenticationService"
+                     group="hsa-cep-auc" version="1.0.0" check="false"/>
+    <!--业务角色-->
+    <dubbo:reference id="bizrolService" interface="cn.hsa.cep.auc.role.service.BizrolService" group="hsa-cep-auc"
+                     version="1.0.0" check="false"/>
+    <!--权限-->
+    <dubbo:reference id="roleAuthInfoService" interface="cn.hsa.cep.auc.auth.service.RoleAuthInfoService"
+                     group="hsa-cep-auc" version="1.0.0" check="false"/>
+    <!-- 用户信息 -->
+    <dubbo:reference id="ouserService" interface="cn.hsa.cep.auc.login.service.UserService"
+                     group="hsa-cep-auc" version="1.0.0" check="false"/>
+    <!--组织单元-->
+    <dubbo:reference id="unitService" interface="cn.hsa.cep.auc.org.service.UnitService" group="hsa-cep-auc"
+                     version="1.0.0" check="false"/>
+    <!--机构组织单元-->
+    <dubbo:reference id="orguntService" interface="cn.hsa.cep.auc.service.OrguntService" group="hsa-cep-auc"
+                     version="1.0.0" check="false"/>
+    <!--机构组织单元-->
+    <dubbo:reference id="sysBizrolService" interface="cn.hsa.cep.auc.service.SysBizrolService" group="hsa-cep-auc"
+                     version="1.0.0" check="false"/>
+
+
+    <!-- 医保护师信息 -->
+    <dubbo:reference id="nurseInfoService" interface="cn.hsa.cep.usc.api.service.NurseInfoService" check="false"
+                     group="USC-LOCAL" version="1.0.0"/>
+    <!-- 医保药师信息 -->
+    <dubbo:reference id="pharInfoService" interface="cn.hsa.cep.usc.api.service.PharInfoService" check="false"
+                     group="USC-LOCAL" version="1.0.0"/>
+    <!--医疗技师信息-->
+    <dubbo:reference id="medTecnInfoService" interface="cn.hsa.cep.usc.api.service.MedTecnInfoService" check="false"
+                     group="USC-LOCAL" version="1.0.0"/>
+    <!--人员特殊身份信息-->
+    <dubbo:reference id="personTypeService" interface="cn.hsa.cep.usc.api.service.PersonTypeService" check="false"
+                     group="USC-LOCAL" version="1.0.0"/>
+    <!--医保经办人员信息-->
+    <dubbo:reference id="operatorService" interface="cn.hsa.cep.usc.api.service.OperatorService" check="false"
+                     group="USC-LOCAL" version="1.0.0"/>
+    <!--经办机构信息-->
+    <dubbo:reference id="operatingInsService" interface="cn.hsa.cep.usc.api.service.OperatingInsService" check="false"
+                     group="USC-LOCAL" version="1.0.0"/>
+    <!--医保医师信息-->
+    <dubbo:reference id="doctorService" interface="cn.hsa.cep.usc.api.service.DoctorService" check="false"
+                     group="USC-LOCAL" version="1.0.0"/>
+    <!--医疗机构信息-->
+    <dubbo:reference id="medinsInfoService" interface="cn.hsa.cep.usc.api.service.MedinsInfoService" check="false"
+                     group="USC-LOCAL" version="1.0.0"/>
+    <!--零售药店信息-->
+    <dubbo:reference id="rtalPhacService" interface="cn.hsa.cep.usc.api.service.RtalPhacService" check="false"
+                     group="USC-LOCAL" version="1.0.0"/>
+    <!--生产、配送、代理企业信息-->
+    <dubbo:reference id="bidprcuEntpInfoService" interface="cn.hsa.cep.usc.api.service.BidprcuEntpInfoService"
+                     check="false" group="USC-LOCAL" version="1.0.0"/>
+    <dubbo:reference id="drugMcsProdentpService" interface="cn.hsa.cep.usc.api.service.DrugMcsProdentpService"
+                     check="false" group="USC-LOCAL" version="1.0.0"/>
+    <!--参保单位信息-->
+    <dubbo:reference id="insuEmpInfoService" interface="cn.hsa.cep.usc.api.service.InsuEmpInfoService" check="false"
+                     group="USC-LOCAL" version="1.0.0"/>
+    <!--学校基本信息-->
+    <dubbo:reference id="schlBasService" interface="cn.hsa.cep.usc.api.service.SchlBasService" check="false"
+                     group="USC-LOCAL" version="1.0.0"/>
+
+
+    <!--消息中心email服务-->
+    <dubbo:reference id="eMailService" interface="cn.hsa.cep.msc.api.service.EMailService" check="false"
+                     group="MSC-NATION" version="1.0.0"/>
+    <!--站内信服务-->
+    <dubbo:reference id="interMailService" interface="cn.hsa.cep.msc.api.service.InterMailService" check="false"
+                     group="MSC-NATION" version="1.0.0"/>
+    <!--消息服务-->
+    <dubbo:reference id="messageService" interface="cn.hsa.cep.msc.api.service.MessageService" check="false"
+                     group="MSC-NATION" version="1.0.0"/>
+    <!--消息模板服务-->
+    <dubbo:reference id="messageTemplateService" interface="cn.hsa.cep.msc.api.service.MessageTemplateService"
+                     check="false" group="MSC-NATION" version="1.0.0"/>
+
+
+    <!--人员基本信息服务-->
+    <dubbo:reference id="psnBasInfoService" interface="cn.hsa.cep.bic.api.service.PsnBasInfoService" check="false"
+                     group="BIC-LOCAL" version="1.0.0"/>
+    <!--人员证件信息服务-->
+    <dubbo:reference id="psnCertInfoService" interface="cn.hsa.cep.bic.api.service.PsnCertInfoService" check="false"
+                     group="BIC-LOCAL" version="1.0.0"/>
+    <!--单位基本信息服务-->
+    <dubbo:reference id="empBasicInfoService" interface="cn.hsa.cep.bic.api.service.EmpBasicInfoService" check="false"
+                     group="BIC-LOCAL" version="1.0.0"/>
+    <!--单位证件信息服务-->
+    <dubbo:reference id="empCertService" interface="cn.hsa.cep.bic.api.service.EmpCertService" check="false"
+                     group="BIC-LOCAL" version="1.0.0"/>
+    <!--基层行政区划信息服务-->
+    <dubbo:reference id="admdvsGrstService" interface="cn.hsa.cep.bic.api.service.AdmdvsGrstService" check="false"
+                     group="BIC-LOCAL" version="1.0.0"/>
+
+
+    <!-- 政策中心服务行政区划服务 -->
+    <dubbo:reference id="queryAdmdvsService" interface="cn.hsa.cep.plc.std.api.admdvs.service.QueryAdmdvsService"
+                     check="false" group="rpc-cep-plc" version="1.0.0" timeout="60000"/>
+    <!-- 政策中心数据字典服务 -->
+    <dubbo:reference id="queryDataDicService" interface="cn.hsa.cep.plc.std.api.datadic.service.QueryDataDicService"
+                     check="false" group="rpc-cep-plc" version="1.0.0" timeout="60000"/>
+
+
+    <!-- 参保中心人员服务 -->
+    <dubbo:reference id="psnInsuQuryService" interface="cn.hsa.cep.pic.api.psninsu.service.PsnInsuQuryService"
+                     group="rpc-cep-pic" version="1.1.0" check="false"/>
+    <!-- 参保中心机构服务 -->
+    <dubbo:reference id="empInsuQuryService" interface="cn.hsa.cep.pic.api.empinsu.service.EmpInsuQuryService"
+                     group="rpc-cep-pic" version="1.1.0" check="false"/>
+
+</beans>

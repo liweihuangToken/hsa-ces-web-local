@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: hsa-ces
+  cloud:
+    alicloud:
+      acm:
+        file-extension: yaml
+        timeout: 3000
+        refresh-enabled: true
+        group: 33676ea3-db54-46a9-b7c3-dfdde6839c36
+hsaf:
+  trace:
+    defaultBizCode: ces

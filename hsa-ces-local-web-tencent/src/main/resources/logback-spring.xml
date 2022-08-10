@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+
+    <!--
+    说明：
+    1. 文件的命名和加载顺序有关
+       logback.xml早于application.yml加载，logback-spring.xml晚于application.yml加载
+       如果logback配置需要使用application.yml中的属性，需要命名为logback-spring.xml
+    2. logback使用application.yml中的属性
+       使用springProperty才可使用application.yml中的值 可以设置默认值
+    -->
+	<!--腾讯云环境需要腾讯云环境需要升级适配包hsaf-tencent-rpc到1.1.3以上，并且打开此注解并且在日志输出格式中添加%trace才能正确显示链路ID-->
+    <conversionRule conversionWord="trace" converterClass="com.tencent.tsf.logger.LogbackTraceConverter" />
+    <springProperty scope="context" name="LOG_HOME" source="logging.file.path" defaultValue="./"/>
+    <springProperty scope="context" name="APP_NAME" source="spring.application.name" defaultValue="hsa-ces-local"/>
+    <!-- 日志输出级别 -->
+    <springProperty scope="context" name="ROOT_LEVEL" source="logging.level.root" defaultValue="INFO"/>
+    <!--格式化输出 -->
+    <springProperty scope="context" name="PATTERN" source="logging.file.pattern" defaultValue="%d{yyyy-MM-dd HH:mm:ss.SSS} - %trace - [%X{traceID}] - [%thread] %-5level %logger{50}.%M\(%line\) - %msg%n"/>
+    <!--日志保留天数-->
+    <springProperty scope="context" name="MAXHISTORY" source="logging.file.maxHistory" defaultValue="30"/>
+    <!--单个日志文件最大容量-->
+    <springProperty scope="context" name="MAXFILESIZE" source="logging.file.maxFileSize" defaultValue="100MB"/>
+    <!--日志文件总量-->
+    <springProperty scope="context" name="TOTALSIZECAP" source="logging.file.totalSizeCap" defaultValue="10GB"/>
+	
+    <!-- 控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出-->
+            <pattern>${PATTERN}</pattern>
+        </encoder>
+    </appender>
+    <!-- 按照每天生成日志文件 -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${LOG_HOME}/${APP_NAME}.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <!--日志文件保留天数-->
+            <MaxHistory>${MAXHISTORY}</MaxHistory>
+            <!--单个日志大小-->
+            <MaxFileSize>${MAXFILESIZE}</MaxFileSize>
+            <!--日志文件总量-->
+            <totalSizeCap>${TOTALSIZECAP}</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出-->
+            <pattern>${PATTERN}</pattern>
+        </encoder>
+    </appender>
+    <!--打印完整SQL日志，需要配置为debug日志级别-->
+    <logger name="com.apache.ibatis" />
+    <logger name="java.sql.Connection" />
+    <logger name="java.sql.Statement" />
+    <logger name="java.sql.PreparedStatement"/>
+
+    <!-- 本地开发环境默认INFO，hsa的日志级别为DEBUG -->
+    <springProfile name="local">
+        <root level="INFO">
+            <appender-ref ref="FILE"/>
+            <appender-ref ref="STDOUT"/>
+        </root>
+        <logger name="cn.hsa" level="debug"/>
+    </springProfile>
+
+    <!--云上开发环境-->
+    <springProfile name="dev">
+        <root level="INFO">
+            <appender-ref ref="FILE"/>
+        </root>
+        <logger name="cn.hsa" level="debug"/>
+    </springProfile>
+
+    <!--云上测试环境 -->
+    <springProfile name="test">
+        <root level="INFO">
+            <appender-ref ref="FILE"/>
+        </root>
+        <logger name="cn.hsa" level="debug"/>
+    </springProfile>
+
+    <!--云上生产环境-->
+    <springProfile name="prd">
+        <root level="INFO">
+            <appender-ref ref="FILE"/>
+        </root>
+    </springProfile>
+
+    <!-- 日志输出级别 -->
+    <root level="${ROOT_LEVEL}">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>

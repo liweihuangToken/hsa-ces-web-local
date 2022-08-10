@@ -1,0 +1,93 @@
+#set($entityPackage=$package.Entity)
+#set($queryDtoPackage=$entityPackage.replace("entity", "dto.query"))
+#set($end=$entity.length() - 2)
+#set($tableRealName=$entity.substring(0,$end))
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${package.Mapper}.${tableRealName}DAO">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="${entityPackage}.${entity}">
+    #foreach($field in ${table.fields})
+        #if(${field.keyFlag})##生成主键排在第一位
+        <id column="${field.name.toUpperCase()}" property="${field.propertyName}"/>
+        #end
+    #end
+    #foreach($field in ${table.fields})##生成普通字段
+        #if(!${field.keyFlag})
+        <result column="${field.name.toUpperCase()}" property="${field.propertyName}"/>
+        #end
+    #end
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+    #foreach($field in ${table.fields})
+        #if(${field.keyFlag})##生成主键排在第一位
+        ${field.name.toUpperCase()}
+        #end
+    #end
+    #foreach($field in ${table.fields})
+        #if(!${field.keyFlag})
+        , ${field.name.toUpperCase()}
+        #end
+    #end
+    </sql>
+
+    <!-- 批量添加数据 -->
+    <insert id="saveBatch" parameterType="java.util.List">
+        insert into ${table.name.toUpperCase()}
+        (
+        <include refid="Base_Column_List"></include>
+        )
+        <foreach close="" collection="list" item="item" open="" separator="union">
+            select
+            #foreach($field in ${table.fields})
+                #if(${field.keyFlag})
+                #{item.${field.propertyName}}
+                #end
+            #end
+            #foreach($field in ${table.fields})
+                #if(!${field.keyFlag})
+                ,#{item.${field.propertyName}}
+                #end
+            #end
+            from dual
+        </foreach>
+    </insert>
+
+    <!-- 按条件选择，属性之间关系为and -->
+    <select id="selectByQueryDTO" parameterType="${queryDtoPackage}.${tableRealName}QueryDTO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ${table.name.toUpperCase()}
+        <where>
+            <trim prefix="(" prefixOverrides="and" suffix=")" suffixOverrides="">
+                #foreach($field in ${table.fields})
+                    #if(${field.propertyType.equals("LocalDateTime")} || ${field.propertyType.equals("LocalDate")})
+                <if test="${field.propertyName}Start != null and ${field.propertyName}End != null">
+                    and ${field.name.toUpperCase()} between #{${field.propertyName}Start} and #{${field.propertyName}End}
+                </if>
+                <if test="${field.propertyName}Start != null and ${field.propertyName}End == null">
+                    and ${field.name.toUpperCase()} &gt;= #{${field.propertyName}Start}
+                </if>
+                <if test="${field.propertyName}Start == null and ${field.propertyName}End != null">
+                    and ${field.name.toUpperCase()} &lt;= #{${field.propertyName}End}
+                </if>
+                <if test="${field.propertyName} != null">
+                    and ${field.name.toUpperCase()} = #{${field.propertyName}}
+                </if>
+                    #elseif(${field.propertyType.equals("BigDecimal")} || ${field.propertyType.equals("Integer")} || ${field.propertyType.equals("Long")})
+                <if test="${field.propertyName} != null">
+                    and ${field.name.toUpperCase()} = #{${field.propertyName}}
+                </if>
+                    #else
+                <if test="${field.propertyName} != null and ${field.propertyName} != ''">
+                    and ${field.name.toUpperCase()} = #{${field.propertyName}}
+                </if>
+                    #end
+                #end
+            </trim>
+        </where>
+    </select>
+
+</mapper>

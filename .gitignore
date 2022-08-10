@@ -1,0 +1,56 @@
+*.class
+*.log
+*.lock
+
+# Package Files #
+*.jar
+*.war
+*.ear
+target/
+
+# eclipse
+.settings/
+.classpath
+.project
+logs/
+
+# idea
+.idea/
+*.iml
+
+*velocity.log*
+
+### STS ###
+.apt_generated
+.factorypath
+.springBeans
+
+### IntelliJ IDEA ###
+*.iml
+*.ipr
+*.iws
+.idea
+.classpath
+.project
+.settings/
+bin/
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+*.log
+tmp/
+/src/
+/build.gradle
+/.gradle/
+/gradle/
+/gradlew
+/gradlew.bat
+/hsa-ces-local-db/.rebel-remote.xml.bak
+/hsa-ces-local-db/.rebel.xml.bak
+/hsa-ces-local-web-ali/.rebel-remote.xml.bak

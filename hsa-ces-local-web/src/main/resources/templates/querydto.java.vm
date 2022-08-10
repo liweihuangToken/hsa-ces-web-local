@@ -1,0 +1,65 @@
+#set($list=["POOLAREA_NO","RID","CRTER_ID","CRTER_NAME","CRTE_TIME","OPTINS_NO",
+    "OPTINS_NAME","OPTER_ID","OPTER_NAME","OPT_TIME","UPDT_TIME","ADMDVS"])
+#set($entityPackage=$package.Entity)
+#set($addDtoPackage=$entityPackage.replace("entity", "dto.query"))
+package ${addDtoPackage};
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import cn.hsa.ams.rpc.auc.entity.AmsCurrentUser;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+/**
+ * <p>
+ * $!{table.comment}查询传输对象
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@ApiModel(value = "$!{table.comment}查询传输对象" , description = "$!{table.comment}查询传输对象" )
+@Data
+#set($end=$entity.length() - 2)
+#set($tableRealName=$entity.substring(0,$end))
+public class ${tableRealName}QueryDTO extends BasQueryDTO implements Serializable{
+
+    private static final long serialVersionUID= 1L;
+
+## ----------  BEGIN 字段循环遍历  ----------
+#foreach($field in ${table.fields})
+    #set($fieldNameUpcase=$field.name.toUpperCase())
+    #set($falg=true)
+    #foreach($obj in ${list})
+        #if(${obj.equals($fieldNameUpcase)})
+            #set($falg=false)
+            #break
+        #end
+    #end
+    #if(${falg})
+        #if(${field.propertyType.equals("LocalDateTime")} || ${field.propertyType.equals("LocalDate")})
+    @ApiModelProperty(value = "$!{field.comment}_开始")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss" )
+    private ${field.propertyType} ${field.propertyName}Start;
+
+    @ApiModelProperty(value = "$!{field.comment}_结束")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss" )
+    private ${field.propertyType} ${field.propertyName}End;
+
+    @ApiModelProperty(value = "$!{field.comment}")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss" )
+    private ${field.propertyType} ${field.propertyName};
+
+        #else
+    @ApiModelProperty(value = "$!{field.comment}")
+    private ${field.propertyType} ${field.propertyName};
+
+        #end
+    #end
+#end
+}

@@ -1,0 +1,65 @@
+#set($end=$entity.length() - 2)
+#set($tableRealName=$entity.substring(0,$end))
+#set($tableRealNameLower=$tableRealName.substring(0, 1).toLowerCase()+$tableRealName.substring(1))
+#set($entityPackage=$package.Entity)
+#set($servicePackage=$entityPackage.replace("entity", "service"))
+#set($serviceImplPackage=$entityPackage.replace("entity", "service.impl"))
+#set($boPackage=$entityPackage.replace("entity", "bo"))
+#set($daoPackage=$entityPackage.replace("entity", "dao"))
+#set($boImplPackage=$entityPackage.replace("entity", "bo.impl"))
+#set($dtoPackage=$entityPackage.replace("entity", "dto.bas"))
+#set($queryDtoPackage=$entityPackage.replace("entity", "dto.query"))
+#set($updateDtoPackage=$entityPackage.replace("entity", "dto.updt"))
+#set($addDtoPackage=$entityPackage.replace("entity", "dto.add"))
+package ${serviceImplPackage};
+
+import ${boPackage}.${tableRealName}BO;
+import ${dtoPackage}.${tableRealName}DTO;
+import ${queryDtoPackage}.${tableRealName}QueryDTO;
+import ${updateDtoPackage}.${tableRealName}UpdateDTO;
+import ${addDtoPackage}.${tableRealName}AddDTO;
+import ${servicePackage}.${tableRealName}Service;
+import cn.hsa.hsaf.core.framework.HsafService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import cn.hsa.hsaf.core.framework.util.PageResult;
+
+import java.util.List;
+
+/**
+ * $!{table.comment}Service执行层
+ *
+ * @author ${author}
+ * @date ${date}
+ */
+@Service
+public class ${tableRealName}ServiceImpl extends HsafService implements ${tableRealName}Service {
+
+    @Autowired
+    private ${tableRealName}BO ${tableRealNameLower}BO;
+
+    @Override
+    public int save(${tableRealName}AddDTO ${tableRealNameLower}AddDTO){
+        return ${tableRealNameLower}BO.save(${tableRealNameLower}AddDTO);
+    }
+
+    @Override
+    public int updateById(${tableRealName}UpdateDTO ${tableRealNameLower}UpdateDTO){
+        return ${tableRealNameLower}BO.updateById(${tableRealNameLower}UpdateDTO);
+    }
+
+    @Override
+    public ${tableRealName}DTO selectById(String id){
+        return ${tableRealNameLower}BO.selectById(id);
+    }
+
+    @Override
+    public int saveBatch(List<${tableRealName}AddDTO> ${tableRealNameLower}AddDTOList) {
+        return ${tableRealNameLower}BO.saveBatch(${tableRealNameLower}AddDTOList);
+    }
+
+    @Override
+    public PageResult<${tableRealName}DTO> selectByQueryDTO(${tableRealName}QueryDTO ${tableRealNameLower}QueryDTO) {
+        return ${tableRealNameLower}BO.selectByQueryDTO(${tableRealNameLower}QueryDTO);
+    }
+}

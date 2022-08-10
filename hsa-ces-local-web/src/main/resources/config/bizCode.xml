@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bizcodemapper>
+    <!--    Name：业务使用的controller地址  Value：自定义业务编号 下面是示例-->
+    <!--
+    <property name="/ces/web/psnuscmanage/orgbaseinfo/getOrgbaseinfo" value="H01-01-01"/>
+    <property name="/ces/web/psnuscmanage/psnbaseinfo/getPsnbaseinfo" value="H01-02-01"/>
+    -->
+</bizcodemapper>

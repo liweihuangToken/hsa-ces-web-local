@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: hsa-ces
+hsaf:
+  trace:
+    defaultBizCode: ces

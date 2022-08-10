@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="mqProducer" class="cn.hsa.hsaf.mq.MQProducerByOns" init-method="start"
+          destroy-method="shutdown">
+        <property name="properties"> <!--生产者配置信息-->
+            <props>
+                <prop key="GROUP_ID">GID-NHSA-CZHY-TCP</prop>
+                <prop key="AccessKey">d7JXUcy9ecsNoDK5</prop>
+                <prop key="SecretKey">6JIl20nY7fz0O4aIBAR5uD8ueoBgUI</prop>
+                <prop key="NAMESRV_ADDR">
+                    http://MQ_INST_1587868884041871_Bbigm9Zs.cn-beijing-ybcloud-d01.mq.namesrv.cloud.hsip.gov.cn:9876
+                </prop>
+                <!--<prop key="GROUP_ID">${mq.ali.GROUP_ID}</prop>
+                <prop key="AccessKey">${mq.ali.AccessKey}</prop>
+                <prop key="SecretKey">${mq.ali.SecretKey}</prop>
+                <prop key="NAMESRV_ADDR">${mq.ali.NAMESRV_ADDR}</prop>-->
+            </props>
+        </property>
+    </bean>
+
+
+</beans>

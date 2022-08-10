@@ -1,0 +1,49 @@
+<config>
+    <input>
+        <jar in="../target/hsa-ces-local-web-1.0.0.jar" out="../target/hsa-ces-local-web-1.0.0.jar"/>
+    </input>
+
+    <classpath basedir="">
+        <!-- Adding library.jar to the classpath -->
+        <jar name="C:/Users/Administrator/.m2/repository/cn/hsa/hsaf/core/hsaf-core/1.1.4/hsaf-core-1.1.4.jar"/>
+        <!-- Adding all jars in the lib directory to the classpath -->
+        <jar name="../hsa-ces-local-api/target/hsa-ces-local-api.jar"/>
+    </classpath>
+
+    <!--  -->
+    <ignore-classes>
+        <class template="class *springframework*"/>
+        <class template="class *shardingjdbc*"/>
+        <class template="class *jni*"/>
+        <class template="class *alibaba*"/>
+        <class template="class *persistence*"/>
+        <class template="class *apache*"/>
+        <class template="class *repository*"/>
+        <!-- 排除如下包下的类 -->
+        <class template="class cn.hsa.ces.*.*.entity.*"/>
+        <class template="class cn.hsa.ces.*.*.dto.*"/>
+        <class template="class cn.hsa.ces.*.entity.*"/>
+        <class template="class cn.hsa.ces.*.dto.*"/>
+        <class template="class cn.hsa.ces.common*"/>
+        <class template="class cn.hsa.ces.evalcoremgt.*.factory*"/>
+        <!--<class template="class cn.hsa.ces.evalcoremgt*"/>
+        <class template="class cn.hsa.ces.credmgt.credevalmgt.orgcredeval.enumentity*"/>
+        <class template="class cn.hsa.ces.credclct.orgbasinfo.enumentity*"/>
+        <class template="class cn.hsa.ces.credclct.psnbasinfo.enumentity*"/>-->
+        <class template="class *DTO"/>
+        <class template="class *BO"/>
+        <class template="class *Service"/>
+        <class template="class *ServiceImpl"/>
+        <class template="class *DAO"/>
+
+
+    </ignore-classes>
+
+    <keep-names>
+        <method template="*(**)" parameters="keep"/>
+        <class template="class *"/>
+        <field template="static final long serialVersionUID"/>
+
+    </keep-names>
+
+</config>

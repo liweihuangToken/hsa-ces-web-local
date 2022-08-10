@@ -1,0 +1,71 @@
+#set($end=$entity.length() - 2)
+#set($tableRealName=$entity.substring(0,$end))
+#set($tableRealNameLower=$tableRealName.substring(0, 1).toLowerCase()+$tableRealName.substring(1))
+#set($entityPackage=$package.Entity)
+#set($boPackage=$entityPackage.replace("entity", "bo"))
+#set($daoPackage=$entityPackage.replace("entity", "dao"))
+#set($boImplPackage=$entityPackage.replace("entity", "bo.impl"))
+#set($dtoPackage=$entityPackage.replace("entity", "dto.bas"))
+#set($queryDtoPackage=$entityPackage.replace("entity", "dto.query"))
+#set($updateDtoPackage=$entityPackage.replace("entity", "dto.updt"))
+#set($addDtoPackage=$entityPackage.replace("entity", "dto.add"))
+package ${boImplPackage};
+
+import cn.hsa.ams.common.utils.GeneralConvertorUtils;
+import ${package.Entity}.${entity};
+import ${boPackage}.${tableRealName}BO;
+import ${daoPackage}.${tableRealName}DAO;
+import ${dtoPackage}.${tableRealName}DTO;
+import ${queryDtoPackage}.${tableRealName}QueryDTO;
+import ${updateDtoPackage}.${tableRealName}UpdateDTO;
+import ${addDtoPackage}.${tableRealName}AddDTO;
+import cn.hsa.hsaf.core.framework.util.PageResult;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.page.PageMethod;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+/**
+ * $!{table.comment}BO执行层
+ *
+ * @author ${author}
+ * @date ${date}
+ */
+@Component
+public class ${tableRealName}BOImpl implements ${tableRealName}BO {
+
+    @Resource
+    private ${tableRealName}DAO ${tableRealNameLower}DAO;
+
+    @Override
+    public int save(${tableRealName}AddDTO ${tableRealNameLower}AddDTO){
+        return ${tableRealNameLower}DAO.insert(GeneralConvertorUtils.convertor(${tableRealNameLower}AddDTO, ${tableRealName}DO.class));
+    }
+
+    @Override
+    public int updateById( ${tableRealName}UpdateDTO ${tableRealNameLower}UpdateDTO){
+        return  ${tableRealNameLower}DAO.updateById(GeneralConvertorUtils.convertor(${tableRealNameLower}UpdateDTO,  ${tableRealName}DO.class));
+    }
+
+    @Override
+    public ${tableRealName}DTO selectById(String id){
+        ${tableRealName}DO ${tableRealNameLower}DO = ${tableRealNameLower}DAO.selectById(id);
+        return GeneralConvertorUtils.convertor(${tableRealNameLower}DO, ${tableRealName}DTO.class);
+    }
+
+    @Override
+    public int saveBatch(List<${tableRealName}AddDTO> ${tableRealNameLower}AddDTOList){
+        List<${tableRealName}DO> ${tableRealNameLower}DOList = GeneralConvertorUtils.convertor(${tableRealNameLower}AddDTOList, ${tableRealName}DO.class);
+        return ${tableRealNameLower}DAO.saveBatch(${tableRealNameLower}DOList);
+    }
+
+    @Override
+    public PageResult<${tableRealName}DTO> selectByQueryDTO(${tableRealName}QueryDTO ${tableRealNameLower}QueryDTO){
+        PageMethod.startPage(${tableRealNameLower}QueryDTO.getPageNo(), ${tableRealNameLower}QueryDTO.getPageSize());
+        List<${tableRealName}DO> ${tableRealNameLower}DOList = ${tableRealNameLower}DAO.selectByQueryDTO(${tableRealNameLower}QueryDTO);
+        return GeneralConvertorUtils.convertor(${tableRealName}DTO.class, ${tableRealNameLower}DOList);
+    }
+
+}

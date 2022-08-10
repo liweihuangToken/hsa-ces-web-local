@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd" default-autowire="byName">
+
+    <!--<hsf:provider id="userInfoService" ref="userInfoService" interface="cn.hsa.ces.api.UserInfoService"-->
+    <!--version="1.0.0"/>-->
+
+    <!-- 提供者可选配置 -->
+    <!--    serviceInterface   是  服务对外提供的接口  Class  java.lang.Object-->
+    <!--    serviceVersion     否  服务的版本号 String 1.0.0.DAILY-->
+    <!--    serviceGroup       否  服务的组名  String HSF-->
+    <!--    clientTimeout      否  该配置对接口中的所有方法生效，但是如果客户端通过 methodSpecials 属性对某方法配置了超时时间，则该方法的超时时间以客户端配置为准。其他方法不受影响，还是以服务端配置为准（单位 ms） int    -1-->
+    <!--    corePoolSize       否  单独针对这个服务设置最小活跃线程数，从公用线程池中划分出来  int    0-->
+    <!--    maxPoolSize            否  单独针对这个服务设置最大活跃线程数，从公用线程池中划分出来  int    0-->
+    <!--    delayedPublish     否  是否延迟发布 boolean    false-->
+    <!--    includeFilters     否  用户可选的自定义过滤器    String[]   空-->
+    <!--    enableTXC          否  是否开启分布式事务 GTS  boolean    false-->
+    <!--    serializeType      否  服务接口序列化类型，hessian 或者 java  String hessian-->
+    <!--    supportAsynCall        否  是否支持异步调用   String false-->
+    <!--机构信用信息-->
+    <!--    <hsf:provider id="orgCredAnaDDService" group="CES-LOCAL" ref="orgCredAnaDDService"-->
+    <!--                  interface="cn.hsa.ces.api.service.OrgCredAnaDDService" version="1.0.0"/>-->
+    <!--    &lt;!&ndash;黑名单信息&ndash;&gt;-->
+    <!--    <hsf:provider id="bwlstsDService" group="CES-LOCAL" ref="bwlstsDService"-->
+    <!--                  interface="cn.hsa.ces.api.service.BwlstsDService" version="1.0.0"/>-->
+    <!--    &lt;!&ndash;个体信用信息&ndash;&gt;-->
+    <!--    <hsf:provider id="psnCredAnaDDService" group="CES-LOCAL" ref="psnCredAnaDDService"-->
+    <!--                  interface="cn.hsa.ces.api.service.PsnCredAnaDDService" version="1.0.0"/>-->
+    <!--    &lt;!&ndash;同步国家指标&ndash;&gt;-->
+    <!--    <hsf:provider id="credKpiADService" group="CES-LOCAL" ref="credKpiADService"-->
+    <!--                  interface="cn.hsa.ces.api.service.CredKpiADService" version="1.0.0"/>-->
+    <!--    &lt;!&ndash;同步国家模型&ndash;&gt;-->
+    <!--    <hsf:provider id="apiCredModlDService" group="CES-LOCAL" ref="apiCredModlDService"-->
+    <!--                  interface="cn.hsa.ces.api.credmodlapi.APICredModlDService" version="1.0.0"/>-->
+    <!--    &lt;!&ndash;机构信用分&ndash;&gt;-->
+    <!--    <hsf:provider id="apiOrgCredAnaDService" group="CES-LOCAL" ref="apiOrgCredAnaDService"-->
+    <!--                  interface="cn.hsa.ces.api.orgcredanaapi.APIOrgCredAnaDService" version="1.0.0"/>-->
+    <!--    &lt;!&ndash;机构信用分详情&ndash;&gt;-->
+    <!--    <hsf:provider id="apiOrgCredAnaDetlDService" group="CES-LOCAL" ref="apiOrgCredAnaDetlDService"-->
+    <!--                  interface="cn.hsa.ces.api.orgcredanadetlapi.APIOrgCredAnaDetlDService" version="1.0.0"/>-->
+    <!--    &lt;!&ndash;机构信用申诉&ndash;&gt;-->
+    <!--    <hsf:provider id="apiOrgCredApplService" group="CES-LOCAL" ref="apiOrgCredApplService"-->
+    <!--                  interface="cn.hsa.ces.api.orgcredapplapi.APIOrgCredApplService" version="1.0.0"/>-->
+    <!--    &lt;!&ndash;个体信用分&ndash;&gt;-->
+    <!--    <hsf:provider id="apiPsnCredAnaDService" group="CES-LOCAL" ref="apiPsnCredAnaDService"-->
+    <!--                  interface="cn.hsa.ces.api.psncredanaapi.APIPsnCredAnaDService" version="1.0.0"/>-->
+    <!--    &lt;!&ndash;个体信用分详情&ndash;&gt;-->
+    <!--    <hsf:provider id="apiPsnCredAnaDetlDService" group="CES-LOCAL" ref="apiPsnCredAnaDetlDService"-->
+    <!--                  interface="cn.hsa.ces.api.psncredanadetlapi.APIPsnCredAnaDetlDService" version="1.0.0"/>-->
+    <!--    &lt;!&ndash;个体信用申诉&ndash;&gt;-->
+    <!--    <hsf:provider id="apiPsnCredApplService" group="CES-LOCAL" ref="apiPsnCredApplService"-->
+    <!--                  interface="cn.hsa.ces.api.psncredapplapi.APIPsnCredApplService" version="1.0.0"/>-->
+    <!--    &lt;!&ndash;人员信用采集新增&ndash;&gt;-->
+    <!--    <hsf:provider id="apiPsnCredClctService" group="CES-LOCAL" ref="apiPsnCredClctService"-->
+    <!--                  interface="cn.hsa.ces.api.psncredclctapi.APIPsnCredClctService" version="1.0.0"/>-->
+    <!--    &lt;!&ndash;机构信用采集新增&ndash;&gt;-->
+    <!--    <hsf:provider id="apiOrgCredClctService" group="CES-LOCAL" ref="apiOrgCredClctService"-->
+    <!--                  interface="cn.hsa.ces.api.orgcredclctapi.APIOrgCredClctService" version="1.0.0"/>-->
+    <!--    &lt;!&ndash;提交机构满意度评价明细信息&ndash;&gt;-->
+    <!--    <hsf:provider id="apiOrgStsfEvalDetlDService" group="CES-LOCAL" ref="apiOrgStsfEvalDetlDService"-->
+    <!--                  interface="cn.hsa.ces.api.stsfevalapi.APIOrgStsfEvalDetlDService" version="1.0.0"/>-->
+    <!--    &lt;!&ndash;提交个体满意度评价明细信息&ndash;&gt;-->
+    <!--    <hsf:provider id="apiPsnStsfEvalDetlDService" group="CES-LOCAL" ref="apiPsnStsfEvalDetlDService"-->
+    <!--                  interface="cn.hsa.ces.api.stsfevalapi.APIPsnStsfEvalDetlDService" version="1.0.0"/>-->
+</beans>

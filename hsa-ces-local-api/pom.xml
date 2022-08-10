@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cn.hsa.ces</groupId>
+    <artifactId>hsa-ces-local-api</artifactId>
+    <version>1.0.0</version>
+    <name>hsa-ces-local-api</name>
+
+    <parent>
+        <groupId>cn.hsa.ces</groupId>
+        <artifactId>hsa-ces-local</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <!--引入接口注解依赖的包,scope必须是provided-->
+    <dependencies>
+
+        <!--引入返回包装类-->
+        <dependency>
+            <groupId>cn.hsa.hsaf.core</groupId>
+            <artifactId>hsaf-core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--mvc 注解-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--版本和腾讯依赖的feign保持一致-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-openfeign-core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--POJO getter和setter生成-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!--QueryDto找不到依赖问题解决-->
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>javax.validation</groupId>-->
+<!--            <artifactId>validation-api</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.hibernate</groupId>-->
+<!--            <artifactId>hibernate-validator</artifactId>-->
+<!--            <version>6.1.6.Final</version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.1.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.1.6.Final</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!-- 阿里CSB 发布需要打包为FAT Jar  并且将上面hsaf-core依赖的scop注释掉-->
+        <finalName>hsa-ces-api</finalName>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>ylz.core.LogUtil</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- 打资源包 -->
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.1</version>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

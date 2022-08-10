@@ -1,0 +1,69 @@
+#set($end=$entity.length() - 2)
+#set($tableRealName=$entity.substring(0,$end))
+#set($tableRealNameLower=$tableRealName.substring(0, 1).toLowerCase()+$tableRealName.substring(1))
+#set($entityPackage=$package.Entity)
+#set($boPackage=$entityPackage.replace("entity", "bo"))
+#set($servicePackage=$entityPackage.replace("entity", "service"))
+#set($dtoPackage=$entityPackage.replace("entity", "dto.bas"))
+#set($queryDtoPackage=$entityPackage.replace("entity", "dto.query"))
+#set($updateDtoPackage=$entityPackage.replace("entity", "dto.updt"))
+#set($addDtoPackage=$entityPackage.replace("entity", "dto.add"))
+package ${servicePackage};
+
+import ${dtoPackage}.${tableRealName}DTO;
+import ${queryDtoPackage}.${tableRealName}QueryDTO;
+import ${updateDtoPackage}.${tableRealName}UpdateDTO;
+import ${addDtoPackage}.${tableRealName}AddDTO;
+import cn.hsa.hsaf.core.framework.util.PageResult;
+
+import java.util.List;
+
+/**
+ *  $!{table.comment}Service层
+ *
+ * @author ${author}
+ * @date ${date}
+ */
+public interface ${tableRealName}Service {
+
+    /**
+     * 插入一条记录
+     *
+     * @param ${tableRealNameLower}AddDTO
+     * @return
+     */
+    int save(${tableRealName}AddDTO ${tableRealNameLower}AddDTO);
+
+    /**
+     * 根据 ID 修改
+     *
+     * @param ${tableRealNameLower}UpdateDTO
+     * @return
+     */
+    int updateById(${tableRealName}UpdateDTO ${tableRealNameLower}UpdateDTO);
+
+    /**
+     * 根据 ID 修改
+     *
+     * @param id
+     * @return
+     */
+     ${tableRealName}DTO selectById(String id);
+
+    /**
+     * 插入（批量）
+     *
+     * @param ${tableRealNameLower}AddDTOList
+     * @return
+     */
+    int saveBatch(List<${tableRealName}AddDTO> ${tableRealNameLower}AddDTOList);
+
+    /**
+     * 组合查询
+     *
+     * @param ${tableRealNameLower}QueryDTO
+     * @return
+     */
+    PageResult<${tableRealName}DTO> selectByQueryDTO(${tableRealName}QueryDTO ${tableRealNameLower}QueryDTO);
+
+}

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cn.hsa.ces</groupId>
+    <artifactId>hsa-ces-local-db</artifactId>
+    <version>1.0.0</version>
+    <name>hsa-ces-local-db</name>
+
+    <parent>
+        <groupId>cn.hsa.ces</groupId>
+        <artifactId>hsa-ces-local</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+        </dependency>
+
+        <!--接口依赖-->
+        <!--<dependency>-->
+        <!--<groupId>cn.hsa.ces</groupId>-->
+        <!--<artifactId>hsa-ces-local-web</artifactId>-->
+        <!--<version>1.0.0</version>-->
+        <!--<scope>provided</scope>-->
+        <!--</dependency>-->
+    </dependencies>
+
+</project>

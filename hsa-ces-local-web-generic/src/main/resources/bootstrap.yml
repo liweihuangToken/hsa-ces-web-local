@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: hsa-ces
+  cloud:
+    nacos:
+      config:
+        file-extension: properties
+        group: hsa-ces
+dubbo:
+  application:
+    name: hsa-ces
+  protocol:
+    name: dubbo
+hsaf:
+  trace:
+    defaultBizCode: ces

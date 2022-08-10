@@ -1,0 +1,8 @@
+env:
+  # edas的接入点，需要自行阿里驻场人员
+  endpoint: edas-api.console.cn-beijing-ybcloud-d01.cloud.hsip.gov.cn
+  # edas的命名空间id，点击具体edas，查看基本信息。
+  region_id: cn-beijing-ybcloud-d01
+app:
+  # 要发布的edas的id，，点击具体edas，查看基本信息。
+  app_id: a8735e89-3947-479b-a750-0de5769d749b

@@ -1,0 +1,42 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+server:
+  servlet:
+    context-path: /ces
+
+#mybatis:
+#  configuration:
+#    database-id: ${mybatis.database.provider.type:mysql}
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+security:
+  oauth2:
+    client:
+      permits: /login**,/admin/VerifyUserPassword,/admin/getUser,/xxx/api/**,/xxx/swagger**
+
+
+#threadPool
+#threadPool:
+#  executor:
+#    corePoolSize: 10
+#    maximumPoolSize: 20
+#云上日志配置
+#logging:
+#  file:
+#    path: /home/admin/taobao-tomcat-production-7.0.59.3/logs/
+#    pattern: '%d{yyyy-MM-dd HH:mm:ss.SSS} - %trace - [%X{traceID}] - [%thread] %-5level %logger{50}.%M\(%line\) - %msg%n'
+#    totalSizeCap: 10GB
+#    maxHistory: 180
+#    maxFileSize: 50MB
+#  level:
+#    root: info
+#    cn.hsa: debug
+#云上链路监控配置
+#hsaf: 
+#  trace: 
+#    provincecode: 100000
+#    sampling: false
+#    defaultBizCode: ces
+#    monitorurl: http://10.12.67.135:8080/monitor/api/monitor/data/save/list
+#    job_scheduled: 0 0/30 * * * ?
