@@ -1,6 +1,7 @@
 package cn.hsa.ces.comn.handler;
 
 import cn.hsa.ces.basbiz.enums.DelFlagEnum;
+import cn.hsa.ces.basbiz.enums.ValiFalgEnum;
 import cn.hsa.ces.comn.cons.FillFieldConstants;
 import cn.hsa.ces.comn.utils.AppInfoConfigPropertiesUtils;
 import cn.hsa.ces.comn.utils.IdGeneratorUtils;
@@ -42,6 +43,9 @@ public class FixMetaObjectHandler implements MetaObjectHandler {
         }
         if (metaObject.hasGetter(FillFieldConstants.Crte.FILL_CRTETIME)) {
             this.strictInsertFill(metaObject, FillFieldConstants.Crte.FILL_CRTETIME, () -> nowTime, LocalDateTime.class);
+        }
+        if (metaObject.hasGetter(FillFieldConstants.Crte.FILL_CRTETIME)) {
+            this.strictInsertFill(metaObject, FillFieldConstants.Crte.FILL_VALIFLAG, () -> ValiFalgEnum.VALI_FLAG_TRUE.getCode(),String.class);
         }
         updateFill(metaObject);
     }

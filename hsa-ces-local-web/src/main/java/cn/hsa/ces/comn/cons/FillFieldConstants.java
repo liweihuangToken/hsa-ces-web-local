@@ -24,6 +24,10 @@ public class FillFieldConstants {
         public static String FILL_RID = "rid";
 
         public static String FILL_DELFLAG = "delFlag";
+
+        public static String FILL_VALIFLAG = "valiFlag";
+
+
     }
 
     public static class Opt {
