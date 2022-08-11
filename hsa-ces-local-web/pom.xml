@@ -384,11 +384,11 @@
             <version>5.7.16</version>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-mate-starter</artifactId>
             <version>1.2.4</version>
-        </dependency>
+        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
         <dependency>
