@@ -44,8 +44,8 @@ public class FixMetaObjectHandler implements MetaObjectHandler {
         if (metaObject.hasGetter(FillFieldConstants.Crte.FILL_CRTETIME)) {
             this.strictInsertFill(metaObject, FillFieldConstants.Crte.FILL_CRTETIME, () -> nowTime, LocalDateTime.class);
         }
-        if (metaObject.hasGetter(FillFieldConstants.Crte.FILL_CRTETIME)) {
-            this.strictInsertFill(metaObject, FillFieldConstants.Crte.FILL_VALIFLAG, () -> ValiFalgEnum.VALI_FLAG_TRUE.getCode(),String.class);
+        if (metaObject.hasGetter(FillFieldConstants.Crte.FILL_VALIFLAG)) {
+            this.strictInsertFill(metaObject, FillFieldConstants.Crte.FILL_VALIFLAG, () -> ValiFalgEnum.VALI_FLAG_TRUE.getCode(), String.class);
         }
         updateFill(metaObject);
     }
